@@ -10,11 +10,11 @@
 2. 右键 `Install.bat`，选择“以管理员身份运行”
 3. 安装完成后会自动启动，并设置开机自动运行（最高权限）
 
-安装后文件会放到：
-- `%ProgramFiles%\EyeRestReminder`
-
-卸载入口在安装目录中：
-- `%ProgramFiles%\EyeRestReminder\Uninstall.bat`
+安装程序会自动处理：
+- 自动安装 AutoHotkey v2（若未安装）
+- 复制程序到 `%ProgramFiles%\EyeRestReminder`
+- 注册开机自启任务（管理员权限）
+- 生成卸载入口 `%ProgramFiles%\EyeRestReminder\Uninstall.bat`
 
 ## 功能
 

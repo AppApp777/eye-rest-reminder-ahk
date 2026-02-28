@@ -10,23 +10,32 @@ if %errorlevel% neq 0 (
 set "APP_NAME=EyeRestReminder"
 set "TASK_NAME=EyeRestReminder_AutoStart"
 set "INSTALL_DIR=%ProgramFiles%\%APP_NAME%"
-set "AHK_EXE=C:\Users\11626\AppData\Local\Programs\AutoHotkey\v2\AutoHotkey64.exe"
 set "SCRIPT_SRC=%~dp0eye_rest_reminder.ahk"
 set "SCRIPT_DST=%INSTALL_DIR%\eye_rest_reminder.ahk"
 set "START_BAT=%INSTALL_DIR%\StartEyeRestReminder.bat"
 set "UNINSTALL_BAT=%INSTALL_DIR%\Uninstall.bat"
-
-if not exist "%AHK_EXE%" (
-  echo AutoHotkey v2 not found at:
-  echo %AHK_EXE%
-  echo Please install AutoHotkey v2 first.
-  pause
-  exit /b 1
-)
+set "AHK_EXE=C:\Users\%USERNAME%\AppData\Local\Programs\AutoHotkey\v2\AutoHotkey64.exe"
 
 if not exist "%SCRIPT_SRC%" (
   echo Script not found:
   echo %SCRIPT_SRC%
+  pause
+  exit /b 1
+)
+
+if not exist "%AHK_EXE%" (
+  echo AutoHotkey v2 not found. Installing via winget...
+  winget install --id AutoHotkey.AutoHotkey --exact --accept-package-agreements --accept-source-agreements
+  if %errorlevel% neq 0 (
+    echo AutoHotkey installation failed.
+    pause
+    exit /b 1
+  )
+)
+
+if not exist "%AHK_EXE%" (
+  echo AutoHotkey executable still not found:
+  echo %AHK_EXE%
   pause
   exit /b 1
 )
